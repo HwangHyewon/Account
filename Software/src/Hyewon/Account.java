@@ -2,30 +2,29 @@ package Hyewon;
 
 public class Account {
 
-	private double balance;
-	private double debit;
+	protected double balance;
+	protected double debit;
 	
-	public void getBalance(double money){
+	public void credit(double money){
 		balance = balance + money;
 	}
-	public double setBalance(){
+	public double getBalance(){
 		return balance;
 	}
 
-	public void getDebit (double withdrawl){
+	public void debit (double withdrawl){
 		debit = withdrawl;
 	}
-	public double setDebit(){
+	public double getDebit(){
 		return debit;
 	}
 	
-	public double checkAccount(){
-		if(balance>=debit){
-			balance = balance - debit;
-			return balance;
-		}else{
-			return -1;
-		}
+	protected double setBalance(){
+		
+		balance = balance - debit;
+		return balance;
 	}
+			
+		
 }
 	
