@@ -11,7 +11,6 @@ public class CheckingAccount extends Account {
 		this.credit_limit = credit_limit;
 		this.interest = interest;
 		this.loan_interest = loan_interest;
-		WithdrawableMoney = balance + credit_limit;
 	}
 
 	@Override
@@ -19,8 +18,10 @@ public class CheckingAccount extends Account {
 		balance = balance - money;
 	}
 		
+
 	@Override
 	public double getWithdrawableAccount(){
+		WithdrawableMoney = balance + credit_limit;
 		if(WithdrawableMoney<=0){
 			return 0;
 		}else{
@@ -39,7 +40,7 @@ public class CheckingAccount extends Account {
 	
 	public boolean isBankrupted(){
 		if(balance<0){
-			if(credit_limit<=0){
+			if(WithdrawableMoney<=0){
 				return false;
 			}else{
 				return true;
