@@ -2,32 +2,52 @@ package Hyewon;
 
 public class CheckingAccount extends Account {
 	
-	private double credit_limit= 1000;
-	private double interest=1.01;
-	private double loan_interest=1.07;
-	
-	
-	public void loan (double money){
-			if(money<= credit_limit){
-				balance = balance + money;
-				credit_limit = credit_limit - money;
-				System.out.printf("Remained credit_limit is $%.2f\n", credit_limit);
-			}else{
-				System.out.print("Please minus the debit money\n The credit limit is $1000\n");
-				
-			}
-	}
-	
-	
-	public void nextMonth(){
-		if(balance >= 0){
-			balance = balance * interest;
-		}else{
-			balance = balance * loan_interest;
-		}
+	private double credit_limit;
+	private double interest;
+	private double loan_interest;
+	private double WithdrawableMoney;
+	CheckingAccount(double bal, double credit_limit, double interest, double loan_interest){
+		super(bal);
+		this.credit_limit = credit_limit;
+		this.interest = interest;
+		this.loan_interest = loan_interest;
+		WithdrawableMoney = balance + credit_limit;
 	}
 
+	@Override
+	public void debit (double money){
+		balance = balance - money;
+	}
+		
+	@Override
+	public double getWithdrawableAccount(){
+		if(WithdrawableMoney<=0){
+			return 0;
+		}else{
+			return WithdrawableMoney;
+		}
+	}
 	
+	@Override
+	public void passTime(int time){
+		if(balance>=0){
+			balance = balance *(1+ (interest*time));
+		}else{
+			balance = balance*(1+ (loan_interest*time));
+		}
+	}
+	
+	public boolean isBankrupted(){
+		if(balance<0){
+			if(credit_limit<=0){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	}
 }
 	
 
