@@ -1,6 +1,6 @@
 package Hyewon;
 
-public class SavingAccount extends Account {
+public class SavingAccount extends Account implements Valuable {
 	
 	private double interest=0;
 	private int time;
@@ -34,5 +34,14 @@ public class SavingAccount extends Account {
 		if(this.time==12){
 			balance = balance*Math.pow(1+interest, this.time);
 		}
+	}
+	
+	public double EstimateValue(int month){
+		balance = balance*Math.pow(1+interest, month);
+		return balance;
+	}
+	@Override
+	public String toString(){
+		return String.format("SavingAccount_Balance : %.2f ", balance);
 	}
 }

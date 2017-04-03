@@ -1,4 +1,4 @@
-package Hyewon;
+/*package Hyewon;
 import java.util.Scanner;
 public class AccountTest {
 	public static void main(String[] args){
@@ -58,4 +58,4 @@ public class AccountTest {
 				account2.getBalance(),account2.getWithdrawableAccount());
 			
 	}
-}
+}*/

@@ -1,6 +1,6 @@
 package Hyewon;
 
-public class CheckingAccount extends Account {
+public class CheckingAccount extends Account implements Valuable {
 	
 	private double credit_limit;
 	private double interest;
@@ -51,6 +51,15 @@ public class CheckingAccount extends Account {
 		}else{
 			return true;
 		}
+	}
+	
+	public double EstimateValue(int month){
+		passTime(6);
+		return balance;
+	}
+	@Override
+	public String toString(){
+		return String.format("CheckingAccount_Balance : %.2f ", balance);
 	}
 }
 	
