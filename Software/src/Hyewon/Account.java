@@ -3,7 +3,6 @@ package Hyewon;
 public abstract class Account {
 
 	protected double balance;
-	protected double debit;
 	
 	Account(double bal){
 		balance = bal;
@@ -15,20 +14,16 @@ public abstract class Account {
 	public double getBalance(){
 		return balance;
 	}
+	
 
-	public void debit (double withdrawl){
-		debit = withdrawl;
+	public void debit (double money){
+		if(balance >= money){
+			balance = balance - money;
+		}else{
+			System.out.print("Debit amount exceeded the balance\n");
+		}
 	}
-	public double getDebit(){
-		return debit;
-	}
-	
-	protected double setBalance(){
 		
-		balance = balance - debit;
-		return balance;
-	}
-	
 	public abstract double getWithdrawableAccount();
 	public abstract void passTime(int time);		
 }

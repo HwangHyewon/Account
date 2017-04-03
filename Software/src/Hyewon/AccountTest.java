@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class AccountTest {
 	public static void main(String[] args){
 		CheckingAccount account1 = new CheckingAccount(100,50,0.01,0.07);
-		//Account account2 = new SavingAccount(100,0.05);
+		SavingAccount account2 = new SavingAccount(100,0.05);
 		
 		//CheckingAccount
 		Scanner scan = new Scanner(System.in);
@@ -29,7 +29,33 @@ public class AccountTest {
 		System.out.printf("Account1 balance: $ %.2f	\t현재출금가능액: %.2f\n",
 				account1.getBalance(),account1.getWithdrawableAccount());
 		if(account1.isBankrupted()==false){
-			System.out.print("BROKEN\n");
+			System.out.print("account1 went Bankurpt!\n");
 		}
+		
+		//SavingAccount
+		System.out.print("\n");
+		System.out.printf("Account2 balance : $ %.2f \t 현재출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+		System.out.print("6 Month later!\n");
+		
+		account2.passTime(6);
+		
+		System.out.printf("Account2 balance : $ %.2f \t 현재출금가능액: %.2f\n",
+				account2.getBalance(), account2.getWithdrawableAccount());
+		account2.debit(50);
+		
+		System.out.println("next 6 Month later!");
+		account2.passTime(6);
+		System.out.printf("Account2 balance : $ %.2f \t 현재출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+		
+		System.out.println("next 1 Month later!");
+		account2.passTime(1);
+		System.out.printf("Account2 balance : $ %.2f \t 현재출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+		account2.debit(50);
+		System.out.printf("Account2 balance : $ %.2f \t 현재출금가능액: %.2f\n",
+				account2.getBalance(),account2.getWithdrawableAccount());
+			
 	}
 }
