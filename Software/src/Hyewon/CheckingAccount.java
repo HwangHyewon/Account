@@ -1,5 +1,7 @@
 package Hyewon;
 
+import java.util.InputMismatchException;
+
 public class CheckingAccount extends Account implements Valuable {
 	
 	private double credit_limit;
@@ -12,19 +14,27 @@ public class CheckingAccount extends Account implements Valuable {
 		this.credit_limit = credit_limit;
 		this.interest = interest;
 		this.loan_interest = loan_interest;
+		withdrawableMoney = balance + credit_limit;
 	}
 	
 	
 	@Override
-	public void debit(double money){
-		if(withdrawableMoney>=money ){
+	public void debit(double money)
+			throws Exception, InputMismatchException
+		{
+		if(money<0){
+			throw new Exception("음수입력!");
+		}
+		if(withdrawableMoney<money){
+			throw new Exception("Debit amount exceeded account balance");
+		}else{
 			balance = balance - money;
 		}
 	}
 	
 	@Override
 	public double getWithdrawableAccount(){
-		withdrawableMoney = balance + credit_limit;
+		
 		if(withdrawableMoney<=0){
 			return 0;
 		}else{
@@ -54,11 +64,12 @@ public class CheckingAccount extends Account implements Valuable {
 	}
 	
 	public double EstimateValue(int month){
-		passTime(6);
+		passTime(month);
 		return balance;
 	}
 	@Override
 	public String toString(){
+		
 		return String.format("CheckingAccount_Balance : %.2f ", balance);
 	}
 }

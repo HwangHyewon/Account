@@ -1,5 +1,7 @@
 package Hyewon;
 
+import java.util.InputMismatchException;
+
 public class SavingAccount extends Account implements Valuable {
 	
 	private double interest=0;
@@ -11,11 +13,19 @@ public class SavingAccount extends Account implements Valuable {
 	}
 	
 	@Override
-	public void debit(double money){
+	public void debit(double money)
+		throws Exception ,InputMismatchException{
+		if(money<0){
+			throw new Exception("음수입력!");
+		}
 		if(time >=12){
-			balance = balance - money;
+			if(money>balance){
+				throw new Exception("Debit amount exceeded account balance");
+			}else{
+				balance = balance - money;
+			}
 		}else{
-			System.out.print("아직 출급할 수 없습니다\n");
+			throw new Exception("아직 출급할 수 없습니다\n");
 		}
 	}
 

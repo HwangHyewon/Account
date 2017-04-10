@@ -1,5 +1,7 @@
 package Hyewon;
 
+import java.util.InputMismatchException;
+
 public abstract class Account implements Valuable{
 
 	protected double balance;
@@ -16,7 +18,8 @@ public abstract class Account implements Valuable{
 	}
 	
 
-	public void debit (double money){
+	public void debit (double money)
+			throws Exception, InputMismatchException {
 		if(balance >= money){
 			balance = balance - money;
 		}else{
