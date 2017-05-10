@@ -1,32 +1,19 @@
 package Hyewon;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.ArrayList;
+
 public class AccountTest {
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception{
+		CheckingAccount account1 = new CheckingAccount(100,50,0.01,0.07);
+		SavingAccount account2 = new SavingAccount(100,0.05);
 		
-		Account account1 = new CheckingAccount(100,50, 0.01, 0.07);
-		Account account2 = new SavingAccount(100, 0.05);
+		ArrayList<Account> accountList = new ArrayList<Account>();
+		accountList.add(0,account1);
+		accountList.add(1,account2);
 		
-		Scanner scan = new Scanner(System.in);
-		double amount;
+		System.out.println("전체 계좌의 잔액 합산: "+ Account.sumForAccount(accountList));
 		
-		try{
-			System.out.println("Enter deposit amount for Account1: ");
-			amount = scan.nextDouble();
-			account1.debit(amount);
-			System.out.println("Account1 balance : $"+account1.getBalance());
-			
-			System.out.println("Enter deposit amount for Account2:  ");
-			amount = scan.nextDouble();
-			account2.debit(amount);
-			
-		}catch(InputMismatchException ex){
-			System.out.println("예외발생  : 숫자를 입력하세요\n" + ex.toString());
-		}catch(Exception ex) {
-			System.out.println("예외발생   " +ex.toString());
-		}finally{
-			account1.passTime(2);
-			System.out.println("2 month later account1 : " + account1.getBalance());
+		System.out.println("전체 계좌의 12개월 후 적용");
+		Account.passTimeForList(accountList, 12);
+		System.out.println("전체 계좌의 잔액 합산: "+ Account.sumForAccount(accountList));
 		}
-	}
 }

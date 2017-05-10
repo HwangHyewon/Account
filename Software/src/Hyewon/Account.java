@@ -1,6 +1,7 @@
 package Hyewon;
 
 import java.util.InputMismatchException;
+import java.util.ArrayList;
 
 public abstract class Account implements Valuable{
 
@@ -27,7 +28,23 @@ public abstract class Account implements Valuable{
 		}
 	}
 		
+	public static double sumForAccount(ArrayList<? extends Account> list){
+		double sum = 0;
+		for( Account account : list ){
+			sum += account.getBalance();
+		}
+		return sum;
+	}
+	
+	public static void passTimeForList (ArrayList<? extends Account> list, int month){
+		for( Account account : list){
+			account.passTime(month);
+		}
+	}
+	
 	public abstract double getWithdrawableAccount();
-	public abstract void passTime(int time);		
+	public abstract double passTime(int time);
+	public abstract double passTime(); 
+	
 }
 	

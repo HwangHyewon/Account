@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 public class SavingAccount extends Account implements Valuable {
 	
 	private double interest=0;
-	private int time;
+	private int time=0;
 	
 	SavingAccount(double bal, double interest) {
 		super(bal);
@@ -39,17 +39,34 @@ public class SavingAccount extends Account implements Valuable {
 	}
 
 	@Override
-	public void passTime(int time) {
+	public double passTime(int time) {
 		this.time += time;
 		if(this.time==12){
 			balance = balance*Math.pow(1+interest, this.time);
+			return balance;
+		}else{
+			return 0.0;
+		}
+	}
+	
+	public double passTime() {
+		this.time ++;
+		if(this.time==12){
+			return balance*Math.pow(1+interest, this.time);
+		}else{
+			return 0.0;
 		}
 	}
 	
 	public double EstimateValue(int month){
-		balance = balance*Math.pow(1+interest, month);
-		return balance;
+		return balance*Math.pow(1+interest, month);
 	}
+	
+	public double EstimateValue(){
+		return balance*Math.pow(1+interest, 1);
+		
+	}
+	
 	@Override
 	public String toString(){
 		return String.format("SavingAccount_Balance : %.2f ", balance);
